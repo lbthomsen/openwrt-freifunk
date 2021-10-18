@@ -52,6 +52,7 @@ function index()
 	page = assign({"freifunk", "olsr"}, {"admin", "status", "olsr"}, _("OLSR"), 30)
 	page.setuser = false
 	page.setgroup = false
+	page.acl_depends = {}
 
 	if nixio.fs.access("/etc/config/luci_statistics") then
 		assign({"freifunk", "graph"}, {"admin", "statistics", "graph"}, _("Statistics"), 40)
@@ -91,6 +92,8 @@ function index()
 	page.title  = _("Contact")
 	page.order  = 15
 
+	entry({"freifunk", "map"}, template("freifunk-map/frame"), _("Map"), 50)
+	entry({"freifunk", "map", "content"}, template("freifunk-map/map"), nil, 51)
 	entry({"admin", "freifunk", "profile_error"}, template("freifunk/profile_error"))
 end
 
